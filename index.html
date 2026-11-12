@@ -3,26 +3,306 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nika Studios</title>
+<title>Nika Studios — Independent Game Studio</title>
+<meta name="description" content="Nika Studios is an independent game studio making fast, colourful mobile games. Now rolling: Rolling Punk Ball.">
+<meta property="og:title" content="Nika Studios">
+<meta property="og:description" content="Independent game studio. Now rolling: Rolling Punk Ball.">
+<meta property="og:image" content="assets/rolling-punk-ball-feature.jpg">
+<meta name="theme-color" content="#0b0614">
+<link rel="icon" href="assets/rolling-punk-ball-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:780px;margin:40px auto;padding:0 18px;line-height:1.65;color:#1b1f24;background:#fff}
-  h1{font-size:2em;margin-bottom:.2em} h2{font-size:1.25em;margin-top:1.8em;border-bottom:1px solid #e3e6ea;padding-bottom:.25em}
-  a{color:#0b6bcb} li{margin:.35em 0} small{color:#666}
+  :root{
+    --bg:#0b0614; --bg2:#120a20; --ink:#f6f1ff; --muted:#b9add6;
+    --pink:#ff2d95; --orange:#ff8a3d; --gold:#ffd166; --cyan:#22e4ff; --violet:#8b5cf6;
+    --sunset:linear-gradient(100deg,#ffd166 0%,#ff8a3d 28%,#ff2d95 62%,#8b5cf6 100%);
+    --radius:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+  .display{font-family:Anton,Impact,"Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.9}
+  .grad{background:var(--sunset);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.32em;text-transform:uppercase;color:var(--cyan)}
+
+  /* ---------- nav */
+  nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .35s,backdrop-filter .35s,border-color .35s;border-bottom:1px solid transparent}
+  nav.solid{background:rgba(11,6,20,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:rgba(255,255,255,.06)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:.6rem;font-family:Anton,Impact,sans-serif;font-size:1.45rem;letter-spacing:.06em}
+  .logo .dot{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 8%,transparent 9%),conic-gradient(from 210deg,var(--cyan),var(--violet),var(--pink),var(--orange),var(--cyan));box-shadow:0 0 18px rgba(255,45,149,.55)}
+  .links{display:flex;gap:2rem;font-size:.82rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+  .links a{opacity:.8;transition:opacity .2s,color .2s}
+  .links a:hover{opacity:1;color:var(--gold)}
+  @media (max-width:720px){.links{gap:1.1rem;font-size:.7rem;letter-spacing:.1em}.links .hide-sm{display:none}}
+
+  /* ---------- hero */
+  .hero{position:relative;min-height:100svh;display:grid;place-items:end start;overflow:hidden;isolation:isolate}
+  .hero .bg{position:absolute;inset:-6% -2% -2%;background:url("assets/world-neon-city.jpg") center 35%/cover no-repeat;transform:scale(1.08);z-index:-3;will-change:transform}
+  .hero::before{content:"";position:absolute;inset:0;z-index:-2;
+    background:
+      linear-gradient(180deg,rgba(11,6,20,.35) 0%,rgba(11,6,20,.15) 35%,rgba(11,6,20,.85) 82%,var(--bg) 100%),
+      linear-gradient(90deg,rgba(11,6,20,.85) 0%,rgba(11,6,20,.25) 55%,rgba(11,6,20,0) 100%)}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 50% at 75% 20%,rgba(255,45,149,.28),transparent 70%),radial-gradient(40% 40% at 10% 90%,rgba(34,228,255,.18),transparent 70%);mix-blend-mode:screen}
+  .hero .content{padding:0 0 12vh;width:min(1180px,100% - 40px);margin-inline:auto}
+  .hero h1{font-size:clamp(4rem,15vw,13rem)}
+  .hero h1 span{display:block}
+  .hero h1 .studios{font-size:.42em;letter-spacing:.32em;margin-top:.15em;-webkit-text-stroke:1.5px rgba(246,241,255,.9);color:transparent}
+  .hero p.tag{max-width:520px;margin-top:1.6rem;font-size:clamp(1rem,1.6vw,1.2rem);color:var(--muted)}
+  .cta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.6rem;border-radius:999px;font-weight:800;font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;transition:transform .2s,box-shadow .2s,background .2s}
+  @media (max-width:520px){.btn{padding:.9rem 1.2rem;font-size:.74rem;letter-spacing:.1em}.btn .long{display:none}}
+  .btn.primary{background:var(--sunset);color:#1a0b1f;box-shadow:0 10px 40px -10px rgba(255,45,149,.75)}
+  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 50px -10px rgba(255,45,149,.9)}
+  .btn.ghost{border:1.5px solid rgba(246,241,255,.35);backdrop-filter:blur(6px)}
+  .btn.ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+  .scroll{position:absolute;right:max(20px,calc((100vw - 1180px)/2));bottom:12vh;writing-mode:vertical-rl;font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:1rem}
+  .scroll::after{content:"";width:1px;height:70px;background:linear-gradient(var(--pink),transparent);animation:drip 2.2s ease-in-out infinite}
+  @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+  @media (max-width:720px){.scroll{display:none}.hero .content{padding-bottom:9vh}}
+
+  /* ---------- marquee */
+  .marquee{border-block:1px solid rgba(255,255,255,.07);background:linear-gradient(90deg,rgba(255,45,149,.08),rgba(34,228,255,.06));overflow:hidden;white-space:nowrap}
+  .marquee .track{display:inline-flex;gap:3rem;padding:1.1rem 0;animation:slide 32s linear infinite}
+  .marquee span{font-family:Anton,Impact,sans-serif;font-size:1.4rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(246,241,255,.8)}
+  .marquee span i{font-style:normal;color:var(--pink);margin-left:3rem}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ---------- sections */
+  section{padding:clamp(5rem,11vw,9rem) 0}
+  .head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1.5rem;margin-bottom:3rem}
+  .head h2{font-size:clamp(2.6rem,7vw,5.6rem)}
+  .head p{max-width:420px;color:var(--muted)}
+
+  /* ---------- featured game */
+  .game{position:relative}
+  .game-card{position:relative;border-radius:calc(var(--radius) + 8px);overflow:hidden;min-height:620px;display:grid;align-items:end;isolation:isolate;box-shadow:0 40px 120px -40px rgba(255,45,149,.45)}
+  .game-card .art{position:absolute;inset:0;background:url("assets/rolling-punk-ball-feature.jpg") center/cover;z-index:-2;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .game-card:hover .art{transform:scale(1.04)}
+  .game-card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(11,6,20,.96) 0%,rgba(11,6,20,.6) 45%,rgba(11,6,20,.05) 80%)}
+  .game-info{display:grid;grid-template-columns:auto 1fr auto;gap:1.6rem;align-items:center;padding:clamp(1.5rem,4vw,3rem)}
+  .game-info img.icon{width:clamp(84px,10vw,120px);border-radius:26px;box-shadow:0 0 0 2px rgba(255,255,255,.12),0 16px 50px -10px rgba(34,228,255,.6)}
+  .game-info h3{font-size:clamp(2.4rem,6vw,4.6rem)}
+  .game-info p{color:var(--muted);max-width:560px;margin-top:.4rem}
+  .badge{display:inline-flex;align-items:center;gap:.55rem;padding:.85rem 1.3rem;border-radius:14px;background:#000;border:1px solid rgba(255,255,255,.18);font-size:.72rem;letter-spacing:.06em;line-height:1.15;transition:border-color .2s,transform .2s}
+  .badge:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .badge b{display:block;font-size:1.08rem;letter-spacing:0}
+  .badge svg{width:26px;height:26px}
+  .status{display:inline-block;margin-bottom:.8rem;padding:.35rem .8rem;border-radius:999px;font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,209,102,.14);color:var(--gold);border:1px solid rgba(255,209,102,.35)}
+  @media (max-width:860px){.game-info{grid-template-columns:auto 1fr}.game-info .store{grid-column:1/-1}.game-card{min-height:560px}}
+
+  /* ---------- worlds */
+  .worlds{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.2rem}
+  .world{position:relative;aspect-ratio:3/4;border-radius:var(--radius);overflow:hidden;isolation:isolate;cursor:default}
+  .world img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .9s cubic-bezier(.2,.7,.2,1),filter .5s;filter:saturate(1.05)}
+  .world::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(11,6,20,.92),rgba(11,6,20,.1) 60%)}
+  .world:hover img{transform:scale(1.08);filter:saturate(1.3)}
+  .world .label{position:absolute;left:1.2rem;right:1.2rem;bottom:1.2rem}
+  .world .num{font-size:.72rem;font-weight:800;letter-spacing:.3em;color:var(--cyan)}
+  .world h4{font-size:clamp(1.5rem,2.6vw,2.2rem);margin-top:.3rem}
+  .world small{display:block;color:var(--muted);font-size:.84rem;margin-top:.3rem;line-height:1.45}
+  .world .bar{position:absolute;left:0;top:0;height:4px;width:100%;background:var(--accent,var(--pink));box-shadow:0 0 18px var(--accent,var(--pink))}
+  @media (max-width:980px){.worlds{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.worlds{grid-template-columns:1fr}.world{aspect-ratio:4/3}}
+
+  /* ---------- features */
+  .features{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3.5rem}
+  .feature{padding:1.8rem;border-radius:var(--radius);background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.07);transition:transform .3s,border-color .3s}
+  .feature:hover{transform:translateY(-6px);border-color:rgba(255,45,149,.4)}
+  .feature .big{font-size:3.4rem}
+  .feature h5{font-size:1rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-top:.4rem}
+  .feature p{color:var(--muted);font-size:.92rem;margin-top:.35rem}
+  @media (max-width:980px){.features{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.features{grid-template-columns:1fr}}
+
+  /* ---------- studio */
+  .studio{position:relative;overflow:hidden;background:radial-gradient(70% 90% at 100% 0%,rgba(139,92,246,.22),transparent 60%),radial-gradient(60% 80% at 0% 100%,rgba(255,138,61,.15),transparent 60%),var(--bg2)}
+  .studio .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+  .studio h2{font-size:clamp(2.8rem,7.5vw,6.2rem)}
+  .studio p{color:var(--muted);font-size:1.08rem;margin-top:1.2rem;max-width:560px}
+  .pillars{display:grid;gap:1rem}
+  .pillar{display:flex;gap:1.1rem;align-items:flex-start;padding:1.3rem 1.4rem;border-radius:18px;background:rgba(11,6,20,.55);border:1px solid rgba(255,255,255,.07)}
+  .pillar .n{font-family:Anton,Impact,sans-serif;font-size:1.8rem;line-height:1}
+  .pillar b{display:block;letter-spacing:.04em}
+  .pillar span{color:var(--muted);font-size:.92rem}
+  @media (max-width:860px){.studio .grid{grid-template-columns:1fr}}
+
+  /* ---------- contact */
+  .contact{text-align:center;position:relative;overflow:hidden}
+  .contact h2{font-size:clamp(3rem,10vw,8.5rem)}
+  .contact p{color:var(--muted);margin:1.2rem auto 2.2rem;max-width:520px}
+  .contact .glow{position:absolute;left:50%;top:60%;width:900px;height:900px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,45,149,.18),transparent 60%);z-index:-1;pointer-events:none}
+
+  /* ---------- footer */
+  footer{border-top:1px solid rgba(255,255,255,.07);padding:2.2rem 0 2.6rem;color:var(--muted);font-size:.86rem}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:space-between;align-items:center}
+  footer nav{position:static;border:0}
+  footer .legal{display:flex;flex-wrap:wrap;gap:1.4rem}
+  footer .legal a:hover{color:var(--gold)}
+
+  /* ---------- reveal */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.hero .bg{transform:none}}
 </style>
 </head>
 <body>
-<h1>Nika Studios</h1>
-<p>Independent mobile game studio.</p>
 
-<h2>Games</h2>
-<ul>
-  <li><b>Rolling Punk Ball</b> — <a href="privacy-policy/rolling-punk-ball/">Privacy Policy</a></li>
-</ul>
+<nav id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="dot"></span>NIKA STUDIOS</a>
+    <div class="links">
+      <a href="#games">Games</a>
+      <a href="#studio" class="hide-sm">Studio</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
 
-<h2>Legal</h2>
-<p><a href="privacy-policy/">All privacy policies</a></p>
+<header class="hero" id="top">
+  <div class="bg" id="heroBg"></div>
+  <div class="content">
+    <p class="eyebrow reveal">Independent game studio</p>
+    <h1 class="display reveal d1"><span class="grad">Nika</span><span class="studios">Studios</span></h1>
+    <p class="tag reveal d2">We make fast, loud, neon-soaked mobile games you can pick up in a second and keep playing for hours.</p>
+    <div class="cta reveal d3">
+      <a class="btn primary" href="#games"><span class="long">Now rolling:</span> Rolling Punk Ball →</a>
+      <a class="btn ghost" href="#studio">About the studio</a>
+    </div>
+  </div>
+  <div class="scroll">Scroll</div>
+</header>
 
-<h2>Contact</h2>
-<p><a href="mailto:nikastudios.games@gmail.com">nikastudios.games@gmail.com</a></p>
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Rolling Punk Ball<i>✦</i></span><span>80 Levels<i>✦</i></span><span>4 Worlds<i>✦</i></span><span>Secret Gems<i>✦</i></span><span>Free on Android<i>✦</i></span>
+    <span>Rolling Punk Ball<i>✦</i></span><span>80 Levels<i>✦</i></span><span>4 Worlds<i>✦</i></span><span>Secret Gems<i>✦</i></span><span>Free on Android<i>✦</i></span>
+  </div>
+</div>
+
+<section class="game" id="games">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <p class="eyebrow reveal">Our games</p>
+        <h2 class="display reveal d1">Featured<br><span class="grad">Release</span></h2>
+      </div>
+      <p class="reveal d2">One ball. Three lanes. Eighty levels of jump pads, laser fences, crates and secret gems across four wild worlds.</p>
+    </div>
+
+    <article class="game-card reveal">
+      <div class="art"></div>
+      <div class="game-info">
+        <img class="icon" src="assets/rolling-punk-ball-icon.png" alt="Rolling Punk Ball icon" width="120" height="120">
+        <div>
+          <span class="status">Coming soon to Google Play</span>
+          <h3 class="display">Rolling Punk Ball</h3>
+          <p>Switch lanes, launch off jump pads, smash crates for loot and grab power-ups like Magnet, Shield and Turbo. Find all three hidden gems in every level, then customise your ball in the shop.</p>
+        </div>
+        <div class="store">
+          <a class="badge" href="#games" aria-label="Rolling Punk Ball on Google Play (coming soon)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#22e4ff" d="M3.6 1.8 13.5 12 3.6 22.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1z"/><path fill="#ffd166" d="m17 8.4-3.5 3.6 3.5 3.6 4-2.3c1.1-.6 1.1-2 0-2.6z"/><path fill="#ff2d95" d="M3.6 1.8 13.5 12l3.5-3.6L5.1 1.6c-.5-.3-1.1-.2-1.5.2z"/><path fill="#8b5cf6" d="M3.6 22.2 13.5 12l3.5 3.6-11.9 6.8c-.5.3-1.1.2-1.5-.2z"/></svg>
+            <span>COMING SOON ON<b>Google Play</b></span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <p class="eyebrow reveal" style="margin-top:4rem">Four worlds to roll through</p>
+    <div class="worlds">
+      <div class="world reveal" style="--accent:#22e4ff">
+        <span class="bar"></span>
+        <img src="assets/world-neon-city.jpg" alt="Neon City world" loading="lazy">
+        <div class="label"><span class="num">WORLD 01</span><h4 class="display">Neon City</h4><small>Laser fences, spinning sweepers and sliding firewalls under a synthwave sky.</small></div>
+      </div>
+      <div class="world reveal d1" style="--accent:#ff8a3d">
+        <span class="bar"></span>
+        <img src="assets/world-dust-canyon.jpg" alt="Dust Canyon world" loading="lazy">
+        <div class="label"><span class="num">WORLD 02</span><h4 class="display">Dust Canyon</h4><small>Sandstone causeways, rolling boulders and dune waves at dusk.</small></div>
+      </div>
+      <div class="world reveal d2" style="--accent:#7dff4f">
+        <span class="bar"></span>
+        <img src="assets/world-acid-refinery.jpg" alt="Acid Refinery world" loading="lazy">
+        <div class="label"><span class="num">WORLD 03</span><h4 class="display">Acid Refinery</h4><small>Steel grates over a glowing acid lake, swinging hammers and split lanes.</small></div>
+      </div>
+      <div class="world reveal d3" style="--accent:#9ad8ff">
+        <span class="bar"></span>
+        <img src="assets/world-glacier-peaks.jpg" alt="Glacier Peaks world" loading="lazy">
+        <div class="label"><span class="num">WORLD 04</span><h4 class="display">Glacier Peaks</h4><small>An ice road through crystal spires, collapsing ice and snowball rollers.</small></div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature reveal"><div class="big display grad">80</div><h5>Hand-tuned levels</h5><p>Every level builds to a climax, with jump pads, gauntlets and a high road above the danger.</p></div>
+      <div class="feature reveal d1"><div class="big display grad">240</div><h5>Secret gems</h5><p>Three hidden gems per level, tucked behind obstacles and at the top of jumps.</p></div>
+      <div class="feature reveal d2"><div class="big display grad">24</div><h5>Shop items</h5><p>Ball skins, trails and auras, earned with coins and gems from playing.</p></div>
+      <div class="feature reveal d3"><div class="big display grad">3</div><h5>Lanes, one thumb</h5><p>Simple swipe or button controls, fair collisions and a camera built for speed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="studio" id="studio">
+  <div class="wrap grid">
+    <div>
+      <p class="eyebrow reveal">The studio</p>
+      <h2 class="display reveal d1">Small team.<br><span class="grad">Big colour.</span></h2>
+      <p class="reveal d2">Nika Studios is an independent studio building arcade games for phones. We care about instant fun, readable design and worlds that feel alive — games that respect your time and look great doing it.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal"><span class="n grad">01</span><div><b>Instant fun</b><span>Tap once and you're playing. No accounts, no walls of text.</span></div></div>
+      <div class="pillar reveal d1"><span class="n grad">02</span><div><b>Fair challenge</b><span>Hard but honest: every jump lands, every obstacle is readable.</span></div></div>
+      <div class="pillar reveal d2"><span class="n grad">03</span><div><b>Worlds with style</b><span>Bold art direction, neon light and a soundtrack that keeps the pace.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="glow"></div>
+  <div class="wrap">
+    <p class="eyebrow reveal">Get in touch</p>
+    <h2 class="display reveal d1"><span class="grad">Say hello</span></h2>
+    <p class="reveal d2">Feedback, bug reports, press or partnerships — we read every message.</p>
+    <a class="btn primary reveal d3" href="mailto:nikastudios.games@gmail.com">nikastudios.games@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Nika Studios. All rights reserved.</span>
+    <div class="legal">
+      <a href="privacy-policy/rolling-punk-ball/">Privacy Policy</a>
+      <a href="terms/rolling-punk-ball/">Terms of Service</a>
+      <a href="privacy-policy/">All policies</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav turns solid after scrolling past the top of the hero
+  const nav = document.getElementById('nav');
+  const bg = document.getElementById('heroBg');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function onScroll() {
+    const y = window.scrollY;
+    nav.classList.toggle('solid', y > 40);
+    if (!reduce && y < window.innerHeight * 1.2) bg.style.transform = 'scale(1.08) translateY(' + (y * 0.18) + 'px)';
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
